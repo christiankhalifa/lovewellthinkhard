@@ -69,33 +69,6 @@
       font-size: 1.3rem;
       color: #d84a00;
     }
-    form label {
-      font-weight: 600;
-      font-size: 1rem;
-      display: block;
-      margin-bottom: 5px;
-    }
-    form input {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-    form button {
-      background-color: #d84a00;
-      color: white;
-      padding: 12px 25px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    form button:hover {
-      background-color: #b63c00;
-    }
     footer {
       background: #1a1a1a;
       color: white;
@@ -111,14 +84,17 @@
   <!-- Header -->
   <header>
     <div class="logo">
-      <img src="webfiles/logo.png" alt="Love Well Think Hard Logo">
+      <a href="index.html">
+        <img src="webfiles/logo.png" alt="Love Well Think Hard Logo">
+      </a>
     </div>
+
     <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About Us</a>
       <a href="testimonies.html">Testimonies</a>
       <a href="connect.html">Connect With Us</a>
-      <a href="volunteer.html">Volunteer With Us</a>
+      <!-- <a href="volunteer.html">Volunteer With Us</a> -->
       <a href="donate.html">Donate</a>
     </nav>
   </header>
@@ -133,23 +109,23 @@
     </div>
   </section>
 
-  <!-- Mailing List Form Section -->
+  <!-- Mailing List Form Section (Embedded Google Form) -->
   <section class="section">
     <h1>Join Our Mailing List</h1>
     <div class="contact-box">
       <p>Stay updated with our latest news, events, and resources. Fill out the form below to join our mailing list:</p>
-      <form id="mailing-list-form">
-        <label for="name">Name <span style="color:red;">*</span></label>
-        <input type="text" id="name" name="name" required>
 
-        <label for="email">Email Address <span style="color:red;">*</span></label>
-        <input type="email" id="email" name="email" required>
+      <iframe 
+        src="https://forms.gle/ZfoSXgqHMAzmPKiF9"
+        width="100%"
+        height="750"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        style="border:none; border-radius: 12px;">
+        Loading…
+      </iframe>
 
-        <label for="phone">Phone (Optional)</label>
-        <input type="tel" id="phone" name="phone">
-
-        <button type="submit">Subscribe</button>
-      </form>
     </div>
   </section>
 
@@ -158,7 +134,7 @@
     <h1>Join Our Discord Community</h1>
     <div class="contact-box" style="text-align: center;">
       <p>Connect with like-minded people, discuss topics, and stay engaged with our community in real-time.</p>
-      <p>Click <a href="https://discord.gg/5K6kam9NgS" target="_blank">here</a> or scan the QR code below to join:</p>
+      <p>Click or scan the QR code below to join:</p>
       <a href="https://discord.gg/5K6kam9NgS" target="_blank">
         <img src="webfiles/discord.jpg" alt="Join Our Discord" style="max-width:200px; margin-top:20px;">
       </a>
@@ -170,38 +146,5 @@
     © 2025 LoveWellThinkHard.ca — All Rights Reserved
   </footer>
 
-  <!-- JavaScript to submit form as JSON -->
-  <script>
-    const form = document.getElementById("mailing-list-form");
-
-    form.addEventListener("submit", async function(e) {
-      e.preventDefault();
-
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-
-      try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbxpUJaPL5Ws2h_8OAOjcro6guSu5gjeB0ZvHoy2kIHoBidemj_WWZ0hgJuytlq24joz/exec", { // <-- Replace with your Web App URL
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, phone })
-        });
-
-        const result = await response.json();
-
-        if(result.result === "success") {
-          alert("Thank you for subscribing!");
-          form.reset();
-        } else {
-          alert("Error submitting the form. Please try again.");
-          console.error(result.message);
-        }
-      } catch (error) {
-        alert("There was a network error. Please check your Web App URL and try again.");
-        console.error(error);
-      }
-    });
-  </script>
 </body>
 </html>
